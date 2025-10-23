@@ -1,0 +1,22 @@
+[
+{
+  "directory": "/home/muchen/item/connectionPool/build/src",
+  "command": "/usr/bin/c++  -I/home/muchen/item/connectionPool/include -g -std=gnu++11 -o CMakeFiles/test.dir/CommonConnectionPool.cpp.o -c /home/muchen/item/connectionPool/src/CommonConnectionPool.cpp",
+  "file": "/home/muchen/item/connectionPool/src/CommonConnectionPool.cpp"
+},
+{
+  "directory": "/home/muchen/item/connectionPool/build/src",
+  "command": "/usr/bin/c++  -I/home/muchen/item/connectionPool/include -g -std=gnu++11 -o CMakeFiles/test.dir/Connection.cpp.o -c /home/muchen/item/connectionPool/src/Connection.cpp",
+  "file": "/home/muchen/item/connectionPool/src/Connection.cpp"
+},
+{
+  "directory": "/home/muchen/item/connectionPool/build/src",
+  "command": "/usr/bin/c++  -I/home/muchen/item/connectionPool/include -g -std=gnu++11 -o CMakeFiles/test.dir/main.cpp.o -c /home/muchen/item/connectionPool/src/main.cpp",
+  "file": "/home/muchen/item/connectionPool/src/main.cpp"
+},
+{
+  "directory": "/home/muchen/item/connectionPool/build/src",
+  "command": "/usr/bin/c++  -I/home/muchen/item/connectionPool/include -g -std=gnu++11 -o CMakeFiles/test.dir/public.cpp.o -c /home/muchen/item/connectionPool/src/public.cpp",
+  "file": "/home/muchen/item/connectionPool/src/public.cpp"
+}
+]
