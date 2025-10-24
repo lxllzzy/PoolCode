@@ -43,7 +43,7 @@ int main() {
 
     {
         ThreadPool pool;
-        pool.setMode(PoolMode::MODE_CACHED);
+        // pool.setMode(PoolMode::MODE_CACHED);
         // 开始启动线程池
         pool.startPool(4);
 
@@ -53,7 +53,6 @@ int main() {
         auto res3 = pool.submitTask(std::make_shared<MyTask>(100000001, 200000000));
         pool.submitTask(std::make_shared<MyTask>(100000001, 200000000));
         pool.submitTask(std::make_shared<MyTask>(100000001, 200000000));
-        pool.submitTask(std::make_shared<MyTask>(100000001, 200000000));
 
         uLong sum1 = res1.get().cast_<uLong>();
         uLong sum2 = res2.get().cast_<uLong>();
@@ -61,9 +60,8 @@ int main() {
         // uLong sum1 = res1->cast<uLong>();
         // uLong sum2 = res2->cast<uLong>();
         // uLong sum3 = res3->cast<uLong>();
-        std::cout << sum1 + sum2 << std::endl; 
+        std::cout << sum1 + sum2 + sum3 << std::endl; 
     }
-    getchar();
 }
 
 /*

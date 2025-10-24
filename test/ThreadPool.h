@@ -129,18 +129,14 @@ enum class PoolMode {
 
 class Thread {
 public:
-    using ThreadFunc = std::function<void(int)>;
+    using ThreadFunc = std::function<void()>;
     Thread(ThreadFunc func);
     ~Thread();
 
     void start();
 
-    int getId() const;
-
 private:
     ThreadFunc _func;
-    static int _generateTd;
-    int _threadId;
 
 };
 
@@ -153,8 +149,6 @@ public:
 
     void setTaskQueMaxThreshHold(int threshHold);
 
-    void setThreadSizeThreshHold(int threshhold);
-
     // std::shared_ptr<Result> submitTask(std::shared_ptr<Task> sp);
     Result submitTask(std::shared_ptr<Task> sp);
 
@@ -165,15 +159,11 @@ public:
 
 
 private:
-    void threadFunc(int threadid);//为什么这么设计
-    bool checkRunningState() const;
+    void threadFunc();//为什么这么设计
 private: 
-    // std::vector<std::unique_ptr<Thread>> _threads;
-    std::unordered_map<int, std::unique_ptr<Thread>> _threads;
+    std::vector<std::unique_ptr<Thread>> _threads;
     int _initThreadSize;
     int _threadSizeThreshHold;
-    std::atomic_int _curThreadSize;
-    std::atomic_int _idleThreadSize;
 
     std::queue<std::shared_ptr<Task>> _taskQue;
     std::atomic_int _taskSize;
@@ -182,8 +172,6 @@ private:
     std::mutex _taskQueMtx;
     std::condition_variable _notFull;
     std::condition_variable _notEmpty;
-    std::condition_variable _exitCond;
 
     PoolMode _poolMode;
-    std::atomic_bool _isPoolRunning;
 };

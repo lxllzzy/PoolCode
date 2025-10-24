@@ -1,17 +1,17 @@
 [
 {
   "directory": "/home/muchen/item/PoolCode/ThreadPool/build/src",
-  "command": "/usr/bin/c++  -I/home/muchen/item/PoolCode/ThreadPool/include -g -std=gnu++14 -o CMakeFiles/ThreadPool.dir/Semaphore.cpp.o -c /home/muchen/item/PoolCode/ThreadPool/src/Semaphore.cpp",
+  "command": "/usr/bin/c++  -I/home/muchen/item/PoolCode/ThreadPool/include -g -std=gnu++17 -o CMakeFiles/ThreadPool.dir/Semaphore.cpp.o -c /home/muchen/item/PoolCode/ThreadPool/src/Semaphore.cpp",
   "file": "/home/muchen/item/PoolCode/ThreadPool/src/Semaphore.cpp"
 },
 {
   "directory": "/home/muchen/item/PoolCode/ThreadPool/build/src",
-  "command": "/usr/bin/c++  -I/home/muchen/item/PoolCode/ThreadPool/include -g -std=gnu++14 -o CMakeFiles/ThreadPool.dir/ThreadPool.cpp.o -c /home/muchen/item/PoolCode/ThreadPool/src/ThreadPool.cpp",
+  "command": "/usr/bin/c++  -I/home/muchen/item/PoolCode/ThreadPool/include -g -std=gnu++17 -o CMakeFiles/ThreadPool.dir/ThreadPool.cpp.o -c /home/muchen/item/PoolCode/ThreadPool/src/ThreadPool.cpp",
   "file": "/home/muchen/item/PoolCode/ThreadPool/src/ThreadPool.cpp"
 },
 {
   "directory": "/home/muchen/item/PoolCode/ThreadPool/build/src",
-  "command": "/usr/bin/c++  -I/home/muchen/item/PoolCode/ThreadPool/include -g -std=gnu++14 -o CMakeFiles/ThreadPool.dir/main.cpp.o -c /home/muchen/item/PoolCode/ThreadPool/src/main.cpp",
+  "command": "/usr/bin/c++  -I/home/muchen/item/PoolCode/ThreadPool/include -g -std=gnu++17 -o CMakeFiles/ThreadPool.dir/main.cpp.o -c /home/muchen/item/PoolCode/ThreadPool/src/main.cpp",
   "file": "/home/muchen/item/PoolCode/ThreadPool/src/main.cpp"
 }
 ]
