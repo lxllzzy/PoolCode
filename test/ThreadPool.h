@@ -64,6 +64,8 @@ public:
         std::unique_lock<std::mutex> lock(_mtx);
         _resLimit++;
         _cond.notify_all();
+        //linux下condition_variable的析构函数什么也没做
+        //导致这里的状态已经失效，所以可能死锁
     }
 private:
     int _resLimit;
@@ -111,14 +113,16 @@ private:
 
 class Task {
 public:
-    Task();
+    Task() = default;
     ~Task() = default;
     void exec();
-    void setResult(Result* res); 
+    // void setResult(Result* res); 
+    void setResult(std::shared_ptr<Result> res); 
 
     virtual Any run() = 0;
 private:
-    Result* _result;
+    // Result* _result;
+    std::weak_ptr<Result> _result;
 };
 
 //c++新标准class
@@ -129,14 +133,18 @@ enum class PoolMode {
 
 class Thread {
 public:
-    using ThreadFunc = std::function<void()>;
+    using ThreadFunc = std::function<void(int)>;
     Thread(ThreadFunc func);
     ~Thread();
 
     void start();
 
+    int getId() const;
+
 private:
     ThreadFunc _func;
+    static int _generateTd;
+    int _threadId;
 
 };
 
@@ -149,8 +157,10 @@ public:
 
     void setTaskQueMaxThreshHold(int threshHold);
 
-    // std::shared_ptr<Result> submitTask(std::shared_ptr<Task> sp);
-    Result submitTask(std::shared_ptr<Task> sp);
+    void setThreadSizeThreshHold(int threshhold);
+
+    std::shared_ptr<Result> submitTask(std::shared_ptr<Task> sp);
+    // Result submitTask(std::shared_ptr<Task> sp);
 
     void startPool(int initThreadSize = 4);
 
@@ -159,11 +169,15 @@ public:
 
 
 private:
-    void threadFunc();//为什么这么设计
+    void threadFunc(int threadid);//为什么这么设计
+    bool checkRunningState() const;
 private: 
-    std::vector<std::unique_ptr<Thread>> _threads;
+    // std::vector<std::unique_ptr<Thread>> _threads;
+    std::unordered_map<int, std::unique_ptr<Thread>> _threads;
     int _initThreadSize;
     int _threadSizeThreshHold;
+    std::atomic_int _curThreadSize;
+    std::atomic_int _idleThreadSize;
 
     std::queue<std::shared_ptr<Task>> _taskQue;
     std::atomic_int _taskSize;
@@ -172,6 +186,8 @@ private:
     std::mutex _taskQueMtx;
     std::condition_variable _notFull;
     std::condition_variable _notEmpty;
+    std::condition_variable _exitCond;
 
     PoolMode _poolMode;
+    std::atomic_bool _isPoolRunning;
 };

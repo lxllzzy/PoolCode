@@ -64,6 +64,8 @@ public:
         std::unique_lock<std::mutex> lock(_mtx);
         _resLimit++;
         _cond.notify_all();
+        //linux下condition_variable的析构函数什么也没做
+        //导致这里的状态已经失效，所以可能死锁
     }
 private:
     int _resLimit;
@@ -111,14 +113,16 @@ private:
 
 class Task {
 public:
-    Task();
+    Task() = default;
     ~Task() = default;
     void exec();
-    void setResult(Result* res); 
+    // void setResult(Result* res); 
+    void setResult(std::shared_ptr<Result> res); 
 
     virtual Any run() = 0;
 private:
-    Result* _result;
+    // Result* _result;
+    std::weak_ptr<Result> _result;
 };
 
 //c++新标准class
@@ -155,8 +159,8 @@ public:
 
     void setThreadSizeThreshHold(int threshhold);
 
-    // std::shared_ptr<Result> submitTask(std::shared_ptr<Task> sp);
-    Result submitTask(std::shared_ptr<Task> sp);
+    std::shared_ptr<Result> submitTask(std::shared_ptr<Task> sp);
+    // Result submitTask(std::shared_ptr<Task> sp);
 
     void startPool(int initThreadSize = 4);
 
